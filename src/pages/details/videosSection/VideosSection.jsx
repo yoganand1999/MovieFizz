@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
 import "./style.scss";
-
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import { PlayIcon } from "../Playbtn";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
@@ -21,13 +19,18 @@ const VideosSection = ({ data, loading }) => {
         );
     };
 
+    // Check if there are no official videos results
+    if (!data || !data.results || data.results.length === 0) {
+        return null;
+    }
+
     return (
         <div className="videosSection">
             <ContentWrapper>
                 <div className="sectionHeading">Official Videos</div>
                 {!loading ? (
                     <div className="videos">
-                       {data?.results?.map((video) => (
+                       {data.results.map((video) => (
                         <div key={video.id}
                         className="videoItem"
                         onClick={() =>
